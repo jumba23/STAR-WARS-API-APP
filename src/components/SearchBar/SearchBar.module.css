@@ -1,0 +1,15 @@
+.SearchArea{
+    float: right;
+    display: flex;
+    margin: 2% 0;
+}
+
+.SearchInput {
+    width: 75px;
+    align-items: center; 
+}
+
+.Button {
+    width: 75px;
+    align-items: center;
+}
