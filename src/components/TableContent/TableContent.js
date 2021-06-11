@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
-import Table from "react-bootstrap/Table";
-import classes from './TableContent.module.css';
+import SearchBar from "./SearchBar/SearchBar";
+import NavigationButtons from "./NavigationButtons/NavigationButtons";
+import TableLayout from "./TableLayout/TableLayout";
+import Wrapper from "../Helpers/Wrapper";
 
 const TableContent = () => {
+  const [items, setItems] = useState ([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+      const getItems = async () => {
+        const result = await axios('https://swapi.dev/api/people/')
+
+        console.log(result.data)
+        setItems(result.data.results)
+        setIsLoading(false)
+      }
+      getItems();
+    },[])
+
   return (
-    <Table className={classes.Table}>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Birth Date</th>
-          <th scope="col">Height</th>
-          <th scope="col">Mass</th>
-          <th scope="col">Homeworld</th>
-          <th scope="col">Species</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-        </tr>
-      </tbody>
-    </Table>
+    <Wrapper>
+      <SearchBar />
+      <TableLayout isLoading={isLoading} items={items}  />
+      <NavigationButtons />
+    </Wrapper>
   );
 };
 
