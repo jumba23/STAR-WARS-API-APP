@@ -6,6 +6,13 @@ import './NavigationButtons.css';
 
 const NavigationButtons = (props) => {
   
+  const previousButtonHandle = () => {
+
+  }
+
+  const nextButtonHandle = () => {
+    
+  }
 
   return (
     <div className="d-grid gap-3 d-md-flex justify-content-md-end">

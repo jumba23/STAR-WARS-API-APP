@@ -20,14 +20,14 @@ const TableLayout = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.items.map((item, i) => (
+        {props.allCharacters.map((character, i) => (
           <tr key={i}>
-            <td >{item.name}</td>
-            <td >{item.birth_year}</td>
-            <td >{item.height}</td>
-            <td >{item.mass}</td>
-            <td >{item.homeworld}</td>
-            <td >{item.species}</td>
+            <td >{character.name}</td>
+            <td >{character.birth_year}</td>
+            <td >{character.height}</td>
+            <td >{character.mass}</td>
+            <td >{character.homeworld}</td>
+            <td >{character.species}</td>
           </tr>
          ))}
       </tbody>

@@ -7,24 +7,53 @@ import TableLayout from "./TableLayout/TableLayout";
 import Wrapper from "../Helpers/Wrapper";
 
 const TableContent = () => {
-  const [items, setItems] = useState ([]);
+  const BASE_URL = 'https://swapi.dev/api/people/';
+  const [allCharacters, setAllCharacters] = useState ([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPageURL, serCurrentPageURL] = useState(BASE_URL);
+  const [nextPageURL, setNextPageURL] = useState(null);
+  const [prevPageURL, setPrevPageURL] = useState(null);
+
 
   useEffect(() => {
-      const getItems = async () => {
-        const result = await axios('https://swapi.dev/api/people/')
-
+      const getCharacters = async () => {
+        const result = await axios(BASE_URL);
         console.log(result.data)
-        setItems(result.data.results)
+
+        setNextPageURL(convertHTTPtoHTTPS(result.data.next))
+        if (result.data.previous === null){
+          return
+        } else {
+          setPrevPageURL(convertHTTPtoHTTPS(result.data.previous))}
+        console.log(nextPageURL)
+        console.log(prevPageURL)
+
+        result.data.reults.forEach(async (result) => {
+       
+        setNextPageURL(convertHTTPtoHTTPS(result.data.next))
+       
+   
         setIsLoading(false)
+        setAllCharacters(result.data.results)
+        })
       }
-      getItems();
+      getCharacters();
     },[])
 
+  // const homeworld = () => {
+  //   items.forEach(item ) 
+
+  // }
+    
+    const convertHTTPtoHTTPS = (URL) => {
+      const slicedHTTP = URL.slice(4);
+      return `https${slicedHTTP}`
+    }
+    
   return (
     <Wrapper>
       <SearchBar />
-      <TableLayout isLoading={isLoading} items={items}  />
+      <TableLayout isLoading={isLoading} allCharacters={allCharacters}  />
       <NavigationButtons />
     </Wrapper>
   );
