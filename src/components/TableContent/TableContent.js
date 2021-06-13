@@ -9,32 +9,30 @@ import Wrapper from "../Helpers/Wrapper";
 const TableContent = () => {
   const startURL = "https://swapi.dev/api/people/";
   const [allCharacters, setAllCharacters] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [currentPageURL, setCurrentPageURL] = useState(startURL);
   const [nextPageURL, setNextPageURL] = useState(null);
   const [prevPageURL, setPrevPageURL] = useState(null);
 
   useEffect(() => {
     getCharacters();
-  }, []);
+  }, [currentPageURL]);
+
+  useEffect(() => {
+    setAllCharacters([]);
+  }, [nextPageURL, prevPageURL]);
 
   const getCharacters = async () => {
     const getRequestResult = await axios(currentPageURL);
-    console.log(getRequestResult.data);
+    console.log(getRequestResult);
 
     setNextPageURL(getRequestResult.data.next);
-
     setPrevPageURL(getRequestResult.data.previous);
-
-    console.log(nextPageURL);
-    console.log(prevPageURL);
 
     getRequestResult.data.results.forEach(async (character) => {
       character.homeworld = await getHomeworldName(character);
       character.species = await getSpeciesName(character);
       setAllCharacters((allCharacters) => [...allCharacters, character]);
     });
-    setIsLoading(false);
   };
 
   const getHomeworldName = async (character) => {
@@ -51,16 +49,33 @@ const TableContent = () => {
     }
   };
 
+  const getNextPage = () => {
+    if (nextPageURL !== "null") {
+      setCurrentPageURL(convertHTTPtoHTTPS(nextPageURL));
+    } else{
+      return
+    }
+  };
+
+  const getPrevPage = () => {
+      if (prevPageURL !== "null") {
+      setCurrentPageURL(convertHTTPtoHTTPS(prevPageURL));
+    } else{
+      return
+    }
+  };
+
   const convertHTTPtoHTTPS = (URL) => {
     const slicedHTTP = URL.slice(4);
     return `https${slicedHTTP}`;
   };
 
+
   return (
     <Wrapper>
       <SearchBar />
-      <TableLayout isLoading={isLoading} allCharacters={allCharacters} />
-      <NavigationButtons />
+      <TableLayout allCharacters={allCharacters} />
+      <NavigationButtons getPrevPage={getPrevPage} getNextPage={getNextPage} nextPageURL={nextPageURL} prevPageURL={prevPageURL} />
     </Wrapper>
   );
 };

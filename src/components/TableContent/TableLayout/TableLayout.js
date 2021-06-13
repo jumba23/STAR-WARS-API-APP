@@ -21,7 +21,7 @@ const TableLayout = (props) => {
       </thead>
       <tbody>
         {props.allCharacters.map((character, i) => (
-          <tr key={i}>
+            <tr key={i}>
             <td >{character.name}</td>
             <td >{character.birth_year}</td>
             <td >{character.height}</td>
@@ -29,7 +29,7 @@ const TableLayout = (props) => {
             <td >{character.homeworld}</td>
             <td >{character.species}</td>
           </tr>
-         ))}
+        ))}
       </tbody>
     </Table>
     )
