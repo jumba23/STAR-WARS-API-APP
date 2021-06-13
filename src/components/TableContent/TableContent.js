@@ -23,8 +23,7 @@ const TableContent = () => {
 
   const getCharacters = async () => {
     const getRequestResult = await axios(currentPageURL);
-    console.log(getRequestResult);
-
+ 
     setNextPageURL(getRequestResult.data.next);
     setPrevPageURL(getRequestResult.data.previous);
 
@@ -52,16 +51,16 @@ const TableContent = () => {
   const getNextPage = () => {
     if (nextPageURL !== "null") {
       setCurrentPageURL(convertHTTPtoHTTPS(nextPageURL));
-    } else{
-      return
+    } else {
+      return;
     }
   };
 
   const getPrevPage = () => {
-      if (prevPageURL !== "null") {
+    if (prevPageURL !== "null") {
       setCurrentPageURL(convertHTTPtoHTTPS(prevPageURL));
-    } else{
-      return
+    } else {
+      return;
     }
   };
 
@@ -70,12 +69,21 @@ const TableContent = () => {
     return `https${slicedHTTP}`;
   };
 
+  const getSearchQuery = (query) => {
+    setAllCharacters([]);
+    setCurrentPageURL(startURL + query);
+  };
 
   return (
     <Wrapper>
-      <SearchBar />
+      <SearchBar getSearchQuery={getSearchQuery} />
       <TableLayout allCharacters={allCharacters} />
-      <NavigationButtons getPrevPage={getPrevPage} getNextPage={getNextPage} nextPageURL={nextPageURL} prevPageURL={prevPageURL} />
+      <NavigationButtons
+        getPrevPage={getPrevPage}
+        getNextPage={getNextPage}
+        nextPageURL={nextPageURL}
+        prevPageURL={prevPageURL}
+      />
     </Wrapper>
   );
 };
