@@ -3,24 +3,17 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 
 const NavigationButtons = (props) => {
-  const [nextIsDisabled, setNextIsDisabled] = useState(false);
-  const [prevIsDisabled, setPrevIsDisabled] = useState(false);
+  const [isNextDisabled, setIsNextDisabled] = useState(false);
+  const [isPrevDisabled, setIsPrevDisabled] = useState(false);
 
   useEffect(() => {
     checkForDisabledButton();
   }, [props.nextPageURL, props.prevPageURL]);
 
   const checkForDisabledButton = async () => {
-    if (props.nextPageURL === null) {
-      setNextIsDisabled(true);
-    } else {
-      setNextIsDisabled(false);
-    }
-    if (props.prevPageURL === null) {
-      setPrevIsDisabled(true);
-    } else {
-      setPrevIsDisabled(false);
-    }
+    setIsNextDisabled(!Boolean(props.nextPageURL));
+
+    setIsPrevDisabled(!Boolean(props.prevPageURL));
   };
 
   return (
@@ -29,7 +22,7 @@ const NavigationButtons = (props) => {
         variant="secondary"
         id="previousButton"
         onClick={() => props.getPrevPage()}
-        disabled={prevIsDisabled}
+        disabled={isPrevDisabled}
       >
         PREVIOUS
       </Button>
@@ -37,7 +30,7 @@ const NavigationButtons = (props) => {
         variant="secondary"
         id="nextButton"
         onClick={() => props.getNextPage()}
-        disabled={nextIsDisabled}
+        disabled={isNextDisabled}
       >
         NEXT
       </Button>

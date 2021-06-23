@@ -5,15 +5,13 @@ import Form from "react-bootstrap/Form";
 import classes from "./SearchBar.module.css";
 
 const SearchBar = (props) => {
-  const [enteredText, setEnteredText] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleQueryText = (e) => {
-    setEnteredText(e.target.value);
-  };
+  const handleChange = (e) => setSearchTerm(e.target.value);
 
-  const handleSearchButton = () => {
-    props.getSearchQuery(`?search=${enteredText}`);
-    setEnteredText("");
+  const handleClick = () => {
+    props.getSearchQuery(`?search=${searchTerm}`);
+    setSearchTerm("");
   };
 
   return (
@@ -22,14 +20,14 @@ const SearchBar = (props) => {
         classes={classes.SearchInput}
         type="text"
         placeholder="Search here..."
-        value={enteredText}
-        onChange={handleQueryText}
+        value={searchTerm}
+        onChange={handleChange}
         autoFocus
       />
       <Button
         variant="secondary"
         className={classes.Button}
-        onClick={handleSearchButton}
+        onClick={handleClick}
       >
         Search
       </Button>

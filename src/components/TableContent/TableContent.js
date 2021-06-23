@@ -23,56 +23,46 @@ const TableContent = () => {
 
   const getCharacters = async () => {
     const getRequestResult = await axios(currentPageURL);
- 
+
     setNextPageURL(getRequestResult.data.next);
     setPrevPageURL(getRequestResult.data.previous);
 
-    getRequestResult.data.results.forEach(async (character) => {
-      character.homeworld = await getHomeworldName(character);
-      character.species = await getSpeciesName(character);
-      setAllCharacters((allCharacters) => [...allCharacters, character]);
-    });
+    let characters = getRequestResult.data.results;
+    characters = Promise.all(
+      characters.map(async (character) => {
+        character.homeworld = await getHomeworldName(character);
+        character.species = await getSpeciesName(character);
+        return character;
+      })
+    );
+    characters.then((result) => setAllCharacters(result));
   };
 
   const getHomeworldName = async (character) => {
-    character.homeworld = await axios(convertHTTPtoHTTPS(character.homeworld));
+    character.homeworld = await axios(character.homeworld);
     return character.homeworld.data.name;
   };
 
   const getSpeciesName = async (character) => {
     if (character.species.length === 0) {
-      return (character.species = "Unknown");
+      return "Unknown";
     } else {
-      character.species = await axios(convertHTTPtoHTTPS(character.species[0]));
+      character.species = await axios(character.species[0]);
       return character.species.data.name;
     }
   };
 
   const getNextPage = () => {
-    if (nextPageURL !== "null") {
-      setCurrentPageURL(convertHTTPtoHTTPS(nextPageURL));
-    } else {
-      return;
-    }
+    if (nextPageURL === "null") return;
+    setCurrentPageURL(nextPageURL);
   };
 
   const getPrevPage = () => {
-    if (prevPageURL !== "null") {
-      setCurrentPageURL(convertHTTPtoHTTPS(prevPageURL));
-    } else {
-      return;
-    }
+    if (prevPageURL === "null") return;
+    setCurrentPageURL(prevPageURL);
   };
 
-  const convertHTTPtoHTTPS = (URL) => {
-    const slicedHTTP = URL.slice(4);
-    return `https${slicedHTTP}`;
-  };
-
-  const getSearchQuery = (query) => {
-    setAllCharacters([]);
-    setCurrentPageURL(startURL + query);
-  };
+  const getSearchQuery = (query) => setCurrentPageURL(startURL + query);
 
   return (
     <Wrapper>
