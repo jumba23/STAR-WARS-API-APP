@@ -4,10 +4,10 @@ import axios from "axios";
 import SearchBar from "./SearchBar/SearchBar";
 import NavigationButtons from "./NavigationButtons/NavigationButtons";
 import TableLayout from "./TableLayout/TableLayout";
-import Wrapper from "../Helpers/Wrapper";
 
 const TableContent = () => {
   const startURL = "https://swapi.dev/api/people/";
+  const [loading, setLoading] = useState(true);
   const [allCharacters, setAllCharacters] = useState([]);
   const [currentPageURL, setCurrentPageURL] = useState(startURL);
   const [nextPageURL, setNextPageURL] = useState(null);
@@ -19,6 +19,7 @@ const TableContent = () => {
 
   useEffect(() => {
     setAllCharacters([]);
+    setLoading(true);
   }, [nextPageURL, prevPageURL]);
 
   const getCharacters = async () => {
@@ -35,7 +36,10 @@ const TableContent = () => {
         return character;
       })
     );
-    characters.then((result) => setAllCharacters(result));
+    characters.then((result) => {
+      setAllCharacters(result);
+      setLoading(false);
+    });
   };
 
   const getHomeworldName = async (character) => {
@@ -62,19 +66,19 @@ const TableContent = () => {
     setCurrentPageURL(prevPageURL);
   };
 
-  const getSearchQuery = (query) => setCurrentPageURL(startURL + query);
+  const search = (query) => setCurrentPageURL(startURL + query);
 
   return (
-    <Wrapper>
-      <SearchBar getSearchQuery={getSearchQuery} />
-      <TableLayout allCharacters={allCharacters} />
+    <>
+      <SearchBar search={search} />
+      <TableLayout allCharacters={allCharacters} loading={loading} />
       <NavigationButtons
         getPrevPage={getPrevPage}
         getNextPage={getNextPage}
         nextPageURL={nextPageURL}
         prevPageURL={prevPageURL}
       />
-    </Wrapper>
+    </>
   );
 };
 

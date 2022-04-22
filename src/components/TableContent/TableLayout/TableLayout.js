@@ -1,9 +1,9 @@
 import React from "react";
-
-import classes from "./TableLayout.module.css";
+import { Spinner } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import classes from "./TableLayout.module.css";
 
-const TableLayout = (props) => {
+const TableLayout = ({ allCharacters, loading }) => {
   return (
     <Table className={classes.Table}>
       <thead className={classes.Header}>
@@ -16,18 +16,31 @@ const TableLayout = (props) => {
           <th scope="col">Species</th>
         </tr>
       </thead>
-      <tbody>
-        {props.allCharacters.map((character, i) => (
-          <tr key={i}>
-            <td>{character.name}</td>
-            <td>{character.birth_year}</td>
-            <td>{character.height}</td>
-            <td>{character.mass}</td>
-            <td>{character.homeworld}</td>
-            <td>{character.species}</td>
+      {loading === true ? (
+        <tbody>
+          <tr>
+            <td align="center" colSpan={6}>
+              <Spinner
+                animation="border"
+                role="status"
+              ></Spinner>
+            </td>
           </tr>
-        ))}
-      </tbody>
+        </tbody>
+      ) : (
+        <tbody>
+          {allCharacters.map((character, i) => (
+            <tr key={i}>
+              <td>{character.name}</td>
+              <td>{character.birth_year}</td>
+              <td>{character.height}</td>
+              <td>{character.mass}</td>
+              <td>{character.homeworld}</td>
+              <td>{character.species}</td>
+            </tr>
+          ))}
+        </tbody>
+      )}
     </Table>
   );
 };

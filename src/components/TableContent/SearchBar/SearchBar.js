@@ -4,13 +4,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import classes from "./SearchBar.module.css";
 
-const SearchBar = (props) => {
+const SearchBar = ({search}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => setSearchTerm(e.target.value);
 
   const handleClick = () => {
-    props.getSearchQuery(`?search=${searchTerm}`);
+    search(`?search=${searchTerm}`);
     setSearchTerm("");
   };
 
