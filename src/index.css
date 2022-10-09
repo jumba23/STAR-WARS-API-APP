@@ -1,5 +1,6 @@
 body {
   margin: 0 20%;
-  background-color: black;
+  background-image:url("./components/resources/Star-Wars-Background.jpg");
+  background-size : 100% auto;
   color: rgb(251, 255, 31);
 }
