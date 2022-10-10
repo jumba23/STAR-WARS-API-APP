@@ -1,0 +1,17 @@
+.category-cards {
+    padding-top: 5%;
+     display: flex;
+     flex-wrap: wrap;
+     margin: 0 auto;
+
+}
+
+.individual-card {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.6rem;
+    width: 28vw;
+    height: 22vh;
+    border: 1px solid yellow;
+}
