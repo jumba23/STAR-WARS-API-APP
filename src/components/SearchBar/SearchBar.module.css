@@ -1,0 +1,22 @@
+.SearchArea{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-basis: 20%;
+    margin: 2% 0;
+    margin-left: auto;
+    opacity: 0.5;
+}
+
+.SearchInput  {
+
+    width: 12vw;
+    align-items: center; 
+    color: black;
+}
+
+.Button {
+    align-items: center;
+    color: black;
+}

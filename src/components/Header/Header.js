@@ -1,6 +1,7 @@
 import React from "react";
 import "./header.css";
-import Links from "../Nav/Nav";
+import Nav from "../Nav/Nav";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Header = ({ category }) => {
   return (
@@ -11,7 +12,7 @@ const Header = ({ category }) => {
           Make your selection and <span>may the force be with you!</span>
         </p>
       ) : (
-        <Links />
+        <div className="header-nav-search"><Nav /><SearchBar/></div>
       )}
     </>
   );

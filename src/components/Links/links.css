@@ -1,0 +1,11 @@
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.navLink {
+    color: yellow;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }

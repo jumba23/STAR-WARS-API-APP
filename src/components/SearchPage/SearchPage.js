@@ -1,8 +1,12 @@
-import "./searchPage.css"
+import SearchBar from "../SearchBar/SearchBar"
+import SearchData from "../SearchData/SearchData";
+import "./searchpage.css"
 
 const SearchPage = () => {
     return ( 
-        <><h1>STAR WARS DATA</h1></>
+        <>        
+        <SearchData/>
+        </>
      );
 }
  
