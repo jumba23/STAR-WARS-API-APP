@@ -1,5 +1,4 @@
-import React ,{useState} from "react";
-import Links from "../Links/Links"
+import React from "react";
 import "./categorycards.css"
 
 const CategoryCards = ({handleClick}) => {
@@ -7,13 +6,14 @@ const CategoryCards = ({handleClick}) => {
   
 
     const handleSelection = (e) => {
-        handleClick(e.currentTarget.textContent)
+        let selectedCategory = e.currentTarget.textContent.toLowerCase()
+        handleClick(selectedCategory)
     }
 
     return ( 
-        <div className="category-cards" onClick={handleSelection}>
+        <div className="category-cards">
         {categories.map(category => 
-            <div className="individual-card" key={category}>{category}</div>
+            <div className="individual-card" key={category} onClick={handleSelection}>{category}</div>
         )
         }
         </div>

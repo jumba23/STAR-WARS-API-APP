@@ -4,13 +4,15 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import classes from "./SearchBar.module.css"
 
-const SearchBar = ({search}) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => setSearchTerm(e.target.value);
 
   const handleClick = () => {
-    search(`?search=${searchTerm}`);
+    // search(`?search=${searchTerm}`);
+    console.log(searchTerm)
+    //CALL PROXY FUNCTION
     setSearchTerm("");
   };
 
