@@ -12,7 +12,6 @@ const SearchBar = () => {
   const handleClick = () => {
     // search(`?search=${searchTerm}`);
     console.log(searchTerm)
-    //CALL PROXY FUNCTION
     setSearchTerm("");
   };
 
