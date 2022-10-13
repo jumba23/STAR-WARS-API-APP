@@ -1,13 +1,14 @@
-import "./links.css"
+import "./links.css";
 
-const Links = ({link}) => {
-    const { title, url } = { ...link };
+const Links = ({ category, setCategory }) => {
+  return (
+    <button
+      className="navLink"
+      onClick={(e) => setCategory(e.currentTarget.textContent.toLowerCase())}
+    >
+      {category.toUpperCase()}
+    </button>
+  );
+};
 
-    return (
-      <a className="navLink" href={url}>
-        {title}
-      </a>
-    );
-}
- 
 export default Links;

@@ -6,6 +6,11 @@ nav{
 
 .navLink {
     color: yellow;
+    background-color: black;
     font-size: 1.2rem;
     padding: 0 1rem;
+  }
+
+  .navLink:hover{
+    cursor: pointer;
   }
