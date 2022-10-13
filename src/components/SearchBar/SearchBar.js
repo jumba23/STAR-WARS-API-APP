@@ -2,22 +2,24 @@ import React, { useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import classes from "./SearchBar.module.css";
+import classes from "./SearchBar.module.css"
 
-const SearchBar = ({search}) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => setSearchTerm(e.target.value);
 
   const handleClick = () => {
-    search(`?search=${searchTerm}`);
+    // search(`?search=${searchTerm}`);
+    console.log(searchTerm)
+    //CALL PROXY FUNCTION
     setSearchTerm("");
   };
 
   return (
     <div className={classes.SearchArea}>
       <Form.Control
-        classes={classes.SearchInput}
+        className={classes.SearchInput}
         type="text"
         placeholder="Search here..."
         value={searchTerm}
@@ -29,7 +31,7 @@ const SearchBar = ({search}) => {
         className={classes.Button}
         onClick={handleClick}
       >
-        Search
+        OK
       </Button>
     </div>
   );
