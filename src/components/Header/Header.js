@@ -13,7 +13,7 @@ const Header = ({ category }) => {
         </p>
       ) : (
         <div className="header-nav-search">
-          <Nav/>
+          <Nav />
           <SearchBar />
         </div>
       )}

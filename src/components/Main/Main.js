@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
-import "./displaydata.css";
+import "./main.css";
 import DisplayDetails from "../DisplayDetails/DisplayDetails";
 import CategoryCards from "../CategoryCards/CategoryCards";
-import { Routes, Route } from "react-router-dom";
+import Names from "../Names/Names";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { getCategory } from "../Helper/getCategory";
 
-const DisplayData = ({category}) => {
-
-  const [categoryData, setCategoryData] = useState([]);
+const DisplayData = () => {
+  const { pathname } = useLocation();
+  const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState([]);
 
+  useEffect(() => {
+    fetchCategory();
+  }, [pathname]);
+
   const fetchCategory = async () => {
-    console.log(category);
-    await getCategory(category)
+    console.log(pathname);
+    await getCategory(pathname)
       .then((returnedCategory) => {
         console.log(returnedCategory);
-        setCategoryData(returnedCategory);
+        setList(returnedCategory);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -23,20 +28,14 @@ const DisplayData = ({category}) => {
       });
   };
 
-  useEffect(() => {
-    if (!category) return;
-    fetchCategory();
-  }, [category]);
-
-  
   return (
     <>
       <div className="search-data">
         <Routes>
-          <Route path="/people"></Route>
-          <Route path="/planets"></Route>
-          <Route path="/films"></Route>
-          <Route path="/species"></Route>
+          <Route path="/people" element={<Names list={list} />} />
+          <Route path="/planets" element={<Names list={list} />} />
+          <Route path="/films" element={<Names list={list} />} />
+          <Route path="/species" element={<Names list={list} />} />
           <Route
             path="/"
             exact

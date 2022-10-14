@@ -1,15 +1,16 @@
 import axios from "axios";
-const baseURL = "https://swapi.dev/api/";
+const baseURL = "https://swapi.dev/api";
 
-export const getCategory = async (category) => {
-  let categoryArray = [];
-  const getRequestResult = await axios(baseURL + category);
+export const getCategory = async (pathname) => {
+  let categoryList = [];
+  console.log("inside getCategory ", pathname)
+  const getRequestResult = await axios(baseURL + pathname);
 
   let resultArray = getRequestResult.data.results;
   resultArray.map((element) => {
     return !element.name
-      ? (categoryArray = [...categoryArray, element.title])
-      : (categoryArray = [...categoryArray, element.name]);
+      ? (categoryList = [...categoryList, element.title])
+      : (categoryList = [...categoryList, element.name]);
   });
-  return categoryArray;
+  return categoryList;
 };

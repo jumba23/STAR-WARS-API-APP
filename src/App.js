@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import DisplayData from "./components/DisplayData/DisplayData";
+import React, { useState } from "react";
+import Main from "./components/Main/Main";
 import CategoryCards from "./components/CategoryCards/CategoryCards";
 import Header from "./components/Header/Header";
 import "./index.css";
@@ -11,13 +11,11 @@ function App() {
   };
   return (
     <>
-      <Header
-        category={category}
-      />
+      <Header category={category} />
       {!category ? (
         <CategoryCards handleClick={handleClick} />
       ) : (
-        <DisplayData category={category} />
+        <Main />
       )}
     </>
   );

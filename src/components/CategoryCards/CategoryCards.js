@@ -1,7 +1,7 @@
 import "./categorycards.css";
+import { NavLink } from "react-router-dom";
 
-const CategoryCards = ({ handleClick }) => {
-  const categories = ["PEOPLE", "PLANETS", "FILMS", "SPECIES"];
+const CategoryCards = ({handleClick}) => {
   const handleSelection = (e) => {
     let selectedCategory = e.currentTarget.textContent.toLowerCase();
     handleClick(selectedCategory);
@@ -9,15 +9,18 @@ const CategoryCards = ({ handleClick }) => {
 
   return (
     <div className="category-cards">
-      {categories.map((category) => (
-        <div
-          className="individual-card"
-          key={category}
-          onClick={handleSelection}
-        >
-          {category}
-        </div>
-      ))}
+      <NavLink className="individual-card" to="/people" onClick={handleSelection}>
+        PEOPLE
+      </NavLink>
+      <NavLink className="individual-card" to="/planets" onClick={handleSelection}>
+        PLANETS
+      </NavLink>
+      <NavLink className="individual-card" to="/films" onClick={handleSelection}>
+        FILMS
+      </NavLink>
+      <NavLink className="individual-card" to="/species" onClick={handleSelection}>
+        SPECIES
+      </NavLink>
     </div>
   );
 };
