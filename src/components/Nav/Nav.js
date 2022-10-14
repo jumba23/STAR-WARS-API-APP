@@ -1,15 +1,13 @@
-import Link from "../Links/Links";
+import { NavLink } from "react-router-dom";
+import "./nav.css"
 
-const Nav = ({ categories, setCategory }) => {
+const Nav = () => {
   return (
-    <nav>
-      {categories.map((category) => (
-        <Link
-          category={category}
-          key={category}
-          setCategory={setCategory}
-        />
-      ))}
+    <nav className="main-nav">
+      <NavLink style={({ isActive }) => ({ color: isActive ? "orange" : "yellow" })} to="/people" >PEOPLE</NavLink>
+      <NavLink style={({ isActive }) => ({ color: isActive ? "orange" : "yellow" })} to="/planets">PLANETS</NavLink>
+      <NavLink style={({ isActive }) => ({ color: isActive ? "orange" : "yellow" })} to="/films">FILMS</NavLink>
+      <NavLink style={({ isActive }) => ({ color: isActive ? "orange" : "yellow" })} to="/species">SPECIES</NavLink>
     </nav>
   );
 };

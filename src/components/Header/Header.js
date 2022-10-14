@@ -3,7 +3,7 @@ import "./header.css";
 import Nav from "../Nav/Nav";
 import SearchBar from "../SearchBar/SearchBar";
 
-const Header = ({ category, categories, setCategory }) => {
+const Header = ({ category }) => {
   return (
     <>
       <h1>STAR WARS DATA</h1>
@@ -13,7 +13,7 @@ const Header = ({ category, categories, setCategory }) => {
         </p>
       ) : (
         <div className="header-nav-search">
-          <Nav categories={categories} setCategory={setCategory} />
+          <Nav />
           <SearchBar />
         </div>
       )}
