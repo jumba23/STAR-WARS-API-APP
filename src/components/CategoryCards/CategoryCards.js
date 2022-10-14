@@ -1,6 +1,7 @@
 import "./categorycards.css";
 
-const CategoryCards = ({ handleClick, categories }) => {
+const CategoryCards = ({ handleClick }) => {
+  const categories = ["PEOPLE", "PLANETS", "FILMS", "SPECIES"];
   const handleSelection = (e) => {
     let selectedCategory = e.currentTarget.textContent.toLowerCase();
     handleClick(selectedCategory);

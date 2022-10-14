@@ -1,22 +1,51 @@
+import React, { useState, useEffect } from "react";
 import "./displaydata.css";
+import DisplayDetails from "../DisplayDetails/DisplayDetails";
+import CategoryCards from "../CategoryCards/CategoryCards";
+import { Routes, Route } from "react-router-dom";
+import { getCategory } from "../Helper/getCategory";
 
-const DisplayData = (props) => {
-  const categoryDataArray = [...props.categoryData];
-  console.log(categoryDataArray);
+const DisplayData = ({category}) => {
+
+  const [categoryData, setCategoryData] = useState([]);
+  const [isLoading, setIsLoading] = useState([]);
+
+  const fetchCategory = async () => {
+    console.log(category);
+    await getCategory(category)
+      .then((returnedCategory) => {
+        console.log(returnedCategory);
+        setCategoryData(returnedCategory);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  useEffect(() => {
+    if (!category) return;
+    fetchCategory();
+  }, [category]);
+
+  
   return (
     <>
       <div className="search-data">
-        <ul>
-          {categoryDataArray.map((element) => (
-            <li key={element}>{element}</li>
-          ))}
-        </ul>
-        <div className="search-data-details">
-          <h5>Selection details</h5>
-          <p>Name: </p>
-          <p>Birth Year: </p>
-          <p>Mass: </p>
-        </div>
+        <Routes>
+          <Route path="/people"></Route>
+          <Route path="/planets"></Route>
+          <Route path="/films"></Route>
+          <Route path="/species"></Route>
+          <Route
+            path="/"
+            exact
+            render={() => {
+              return <CategoryCards />;
+            }}
+          ></Route>
+        </Routes>
+        <DisplayDetails />
       </div>
     </>
   );
