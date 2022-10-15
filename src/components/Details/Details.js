@@ -4,16 +4,11 @@ import "./details.css";
 
 const Details = ({ list }) => {
   const { pathname } = useLocation();
-  console.log(list);
   const { id } = useParams();
-  console.log(id);
   let index = id - 1;
   const [details, setDetails] = useState([]);
-  console.log(details);
 
   useEffect(() => {
-    console.log(pathname.includes("people"));
-    console.log("im here");
     switch (true) {
       case pathname.includes("people"):
         const people = [
@@ -22,7 +17,6 @@ const Details = ({ list }) => {
           ["Mass", list[index].mass],
           ["Born", list[index].birth_year],
         ];
-        console.log(people);
         setDetails(people);
         break;
       case pathname.includes("planets"):
@@ -55,7 +49,6 @@ const Details = ({ list }) => {
     }
   }, [pathname]);
 
-  console.log(details);
   return (
     <div className="search-data-details">
       <h5>More info</h5>

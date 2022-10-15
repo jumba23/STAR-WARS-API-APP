@@ -4,21 +4,38 @@ import Details from "../Details/Details";
 import Names from "../Names/Names";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { getCategory } from "../Helper/fetchAPI";
+import { getSearchTerm } from "../Helper/fetchAPI"
 import "./main.css";
 
-const Main = () => {
+const Main = ({searchTerm}) => {
   const { pathname } = useLocation();
   const [list, setList] = useState([]);
   const routes = ["/people", "/planets", "/vehicles", "/species"];
 
+  console.log(pathname)
+ 
   useEffect(() => {
     if (routes.includes(pathname)) fetchCategory();
   }, [pathname]);
+
+  useEffect(() => {
+    fetchSearchTerm();
+  }, [searchTerm]);
 
   const fetchCategory = async () => {
     await getCategory(pathname)
       .then((returnedCategory) => {
         setList(returnedCategory);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const fetchSearchTerm = async () => {
+    await getSearchTerm(searchTerm, pathname.split("/")[1])
+      .then((returnedSearchTerm) => {
+        setList(returnedSearchTerm);
       })
       .catch((err) => {
         console.log(err.message);
@@ -31,16 +48,16 @@ const Main = () => {
         <Routes>
           <Route path="/" element={<LandingPage />}/>
           <Route path="/people" element={<Names list={list} />}>
-            <Route path="/people/:id" element={<Details list={list} />} />
+            <Route path=":id" element={<Details list={list} />} />
           </Route>
           <Route path="/planets" element={<Names list={list} />}>
-            <Route path="/planets/:id" element={<Details list={list} />} />
+            <Route path=":id" element={<Details list={list} />} />
           </Route>
           <Route path="/vehicles" element={<Names list={list} />}>
-            <Route path="/vehicles/:id" element={<Details list={list} />} />
+            <Route path=":id" element={<Details list={list} />} />
           </Route>
           <Route path="/species" element={<Names list={list} />}>
-            <Route path="/species/:id" element={<Details list={list} />} />
+            <Route path=":id" element={<Details list={list} />} />
           </Route>
          </Routes>
       </div>
