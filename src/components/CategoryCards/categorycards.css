@@ -1,6 +1,7 @@
 .category-cards {
   padding-top: 5%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 0 auto;
 }

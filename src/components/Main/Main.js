@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import "./main.css";
-import DisplayDetails from "../DisplayDetails/DisplayDetails";
 import CategoryCards from "../CategoryCards/CategoryCards";
+import Details from "../Details/Details";
 import Names from "../Names/Names";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { getCategory } from "../Helper/getCategory";
+import "./main.css";
 
-const DisplayData = () => {
+const Main = () => {
   const { pathname } = useLocation();
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState([]);
+  const routes = ["/people", "/planets", "/vehicles", "/species"];
 
   useEffect(() => {
-    fetchCategory();
+    if (routes.includes(pathname)) fetchCategory();
   }, [pathname]);
 
   const fetchCategory = async () => {
-    console.log(pathname);
     await getCategory(pathname)
       .then((returnedCategory) => {
         console.log(returnedCategory);
@@ -30,12 +30,20 @@ const DisplayData = () => {
 
   return (
     <>
-      <div className="search-data">
+      <div className="main-display">
         <Routes>
-          <Route path="/people" element={<Names list={list} />} />
-          <Route path="/planets" element={<Names list={list} />} />
-          <Route path="/films" element={<Names list={list} />} />
-          <Route path="/species" element={<Names list={list} />} />
+          <Route path="/people" element={<Names list={list} />}>
+            <Route path="/people/:id" element={<Details list={list} />} />
+          </Route>
+          <Route path="/planets" element={<Names list={list} />}>
+            <Route path="/planets/:id" element={<Details list={list} />} />
+          </Route>
+          <Route path="/vehicles" element={<Names list={list} />}>
+            <Route path="/vehicles/:id" element={<Details list={list} />} />
+          </Route>
+          <Route path="/species" element={<Names list={list} />}>
+            <Route path="/species/:id" element={<Details list={list} />} />
+          </Route>
           <Route
             path="/"
             exact
@@ -44,10 +52,9 @@ const DisplayData = () => {
             }}
           ></Route>
         </Routes>
-        <DisplayDetails />
       </div>
     </>
   );
 };
 
-export default DisplayData;
+export default Main;

@@ -15,8 +15,8 @@ const CategoryCards = ({handleClick}) => {
       <NavLink className="individual-card" to="/planets" onClick={handleSelection}>
         PLANETS
       </NavLink>
-      <NavLink className="individual-card" to="/films" onClick={handleSelection}>
-        FILMS
+      <NavLink className="individual-card" to="/vehicles" onClick={handleSelection}>
+        VEHICLES
       </NavLink>
       <NavLink className="individual-card" to="/species" onClick={handleSelection}>
         SPECIES
