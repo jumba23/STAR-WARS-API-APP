@@ -61,7 +61,7 @@ const Details = ({ list }) => {
       <h5>More info</h5>
       {details.map((element, i) => (
         <div className="details-row" key={i}>
-          <div className="detail-label">{element[0]} :</div>
+          <div className="detail-label">{element[0]}:</div>
           <div className="detail-info"> {element[1]} </div>
         </div>
       ))}

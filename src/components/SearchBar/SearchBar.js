@@ -1,17 +1,38 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getSearchTerm } from "../Helper/fetchAPI";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import classes from "./SearchBar.module.css"
+import classes from "./SearchBar.module.css";
 
 const SearchBar = () => {
+  const { pathname } = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
+
+  const fetchSearchTerm = async () => {
+    console.log(pathname);
+    console.log(category);
+    console.log(searchTerm);
+    await getSearchTerm(searchTerm, category)
+      .then((returnedSearchTerm) => {
+        console.log("returnedSearchTerm", returnedSearchTerm);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  useEffect(() => {
+    setCategory(pathname.split("/")[1]);
+    fetchSearchTerm();
+  }, [pathname]);
 
   const handleChange = (e) => setSearchTerm(e.target.value);
 
   const handleClick = () => {
-    // search(`?search=${searchTerm}`);
-    console.log(searchTerm)
+    console.log(searchTerm);
+    fetchSearchTerm();
     setSearchTerm("");
   };
 
