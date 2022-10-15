@@ -1,59 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getSearchTerm } from "../Helper/fetchAPI";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import classes from "./SearchBar.module.css";
+import "./searchbar.css";
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchTerm }) => {
   const { pathname } = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [formSearch, setFormSearch] = useState("");
   const [category, setCategory] = useState("");
 
-  const fetchSearchTerm = async () => {
-    console.log(pathname);
-    console.log(category);
-    console.log(searchTerm);
-    await getSearchTerm(searchTerm, category)
-      .then((returnedSearchTerm) => {
-        console.log("returnedSearchTerm", returnedSearchTerm);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+  const handleChange = (e) => setFormSearch(e.target.value);
 
-  useEffect(() => {
+  useEffect(()=> {
     setCategory(pathname.split("/")[1]);
-    fetchSearchTerm();
-  }, [pathname]);
+  },[pathname])
 
-  const handleChange = (e) => setSearchTerm(e.target.value);
-
-  const handleClick = () => {
-    console.log(searchTerm);
-    fetchSearchTerm();
-    setSearchTerm("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formSearch);
+    setSearchTerm(formSearch);
+    setFormSearch("");
   };
 
   return (
-    <div className={classes.SearchArea}>
-      <Form.Control
-        className={classes.SearchInput}
+    <form onSubmit={handleSubmit}>
+      <input
         type="text"
-        placeholder="Search here..."
-        value={searchTerm}
+        placeholder={`Search ${category}`}
+        value={formSearch}
         onChange={handleChange}
         autoFocus
       />
-      <Button
-        variant="secondary"
-        className={classes.Button}
-        onClick={handleClick}
-      >
-        OK
-      </Button>
-    </div>
+      <button type="submit">OK</button>
+    </form>
   );
 };
 
