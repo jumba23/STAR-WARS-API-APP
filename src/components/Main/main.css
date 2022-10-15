@@ -1,34 +1,10 @@
 .main-display{
-    margin-left: 5%;
     display:flex;
     align-items: flex-start;
-    justify-content: space-evenly;
+    gap: 5vw;
     margin-top: 3rem;
+    margin-left:15vw;
 }
 
-h5{
-    text-align: center;
-    font-size: 1rem;
-    padding: 0;
-}
 
-.search-data-details{
-    padding: 2vh;
-    display:flex;
-    justify-content: left;
-    flex-direction: column;
-    align-self: center;
-    width: 20vw;
-    height: 20vh;
-    border: 1px solid yellow;
-    background-color: rgba(106, 106, 106, 0.3);
-    border-radius: 1rem;
-}
-
-.search-data-details > div {
-    text-align: left;
-    font-size: 0.9rem;
-    padding-top: 0.6vh;
-    margin-bottom: 0;
-}
 

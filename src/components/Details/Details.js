@@ -1,5 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "./details.css";
 
 const Details = ({ list }) => {
   const { pathname } = useLocation();
@@ -59,8 +60,9 @@ const Details = ({ list }) => {
     <div className="search-data-details">
       <h5>More info</h5>
       {details.map((element, i) => (
-        <div key={i}>
-          {element[0]} : <span> {element[1]} </span>
+        <div className="details-row" key={i}>
+          <div className="detail-label">{element[0]} :</div>
+          <div className="detail-info"> {element[1]} </div>
         </div>
       ))}
     </div>
