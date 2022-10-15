@@ -1,7 +1,7 @@
-import "./categorycards.css";
+import "./landingpage.css";
 import { NavLink } from "react-router-dom";
 
-const CategoryCards = ({handleClick}) => {
+const LandingPage = ({handleClick}) => {
   const handleSelection = (e) => {
     let selectedCategory = e.currentTarget.textContent.toLowerCase();
     handleClick(selectedCategory);
@@ -25,4 +25,4 @@ const CategoryCards = ({handleClick}) => {
   );
 };
 
-export default CategoryCards;
+export default LandingPage;

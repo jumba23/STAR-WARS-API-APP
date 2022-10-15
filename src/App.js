@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Main from "./components/Main/Main";
-import CategoryCards from "./components/CategoryCards/CategoryCards";
+import LandingPage from "./components/LandingPage/LandingPage";
 import Header from "./components/Header/Header";
 import "./index.css";
 
@@ -13,7 +13,7 @@ function App() {
     <>
       <Header category={category} />
       {!category ? (
-        <CategoryCards handleClick={handleClick} />
+        <LandingPage handleClick={handleClick} />
       ) : (
         <Main />
       )}
