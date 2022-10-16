@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "./details.css";
 
 const Details = ({ list }) => {
-  const [prevPath, setPrevPath] = useState("");
   const { pathname } = useLocation();
   const { id } = useParams();
   let i = id - 1;
@@ -18,7 +17,6 @@ const Details = ({ list }) => {
           ["Mass", list[i].mass],
           ["Born", list[i].birth_year],
         ];
-        setPrevPath(pathname);
         setDetails(people);
         break;
       case pathname.includes("planets"):
