@@ -3,23 +3,23 @@
   src: url(../resources/SfDistantGalaxy.ttf);
 }
 
-h1 { 
-   display: flex;
-   justify-content: center;
-    margin-top: 7%;
-    text-align: center;
-    font-size: 7vh;
-    font-family: starWarsFont;
-  }
+h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 7%;
+  text-align: center;
+  font-size: 7vh;
+  font-family: starWarsFont;
+}
 
-p{
+p {
   padding-top: 3%;
   text-align: center;
   font-weight: 600;
   font-size: 1.5rem;
 }
 
-span{
+span {
   font-style: italic;
 }
 

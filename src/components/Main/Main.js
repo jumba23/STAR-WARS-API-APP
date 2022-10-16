@@ -4,16 +4,14 @@ import Details from "../Details/Details";
 import Names from "../Names/Names";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { getCategory } from "../Helper/fetchAPI";
-import { getSearchTerm } from "../Helper/fetchAPI"
+import { getSearchTerm } from "../Helper/fetchAPI";
 import "./main.css";
 
-const Main = ({searchTerm}) => {
+const Main = ({ searchTerm }) => {
   const { pathname } = useLocation();
   const [list, setList] = useState([]);
   const routes = ["/people", "/planets", "/vehicles", "/species"];
 
-  console.log(pathname)
- 
   useEffect(() => {
     if (routes.includes(pathname)) fetchCategory();
   }, [pathname]);
@@ -46,7 +44,6 @@ const Main = ({searchTerm}) => {
     <>
       <div className="main-display">
         <Routes>
-          <Route path="/" element={<LandingPage />}/>
           <Route path="/people" element={<Names list={list} />}>
             <Route path=":id" element={<Details list={list} />} />
           </Route>
@@ -59,7 +56,14 @@ const Main = ({searchTerm}) => {
           <Route path="/species" element={<Names list={list} />}>
             <Route path=":id" element={<Details list={list} />} />
           </Route>
-         </Routes>
+          <Route
+            path="/"
+            exact
+            render={() => {
+              return <LandingPage />;
+            }}
+          />
+        </Routes>
       </div>
     </>
   );

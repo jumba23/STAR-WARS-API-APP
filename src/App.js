@@ -10,8 +10,8 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-        <>
-      <Header setSearchTerm={setSearchTerm}/>
+    <>
+      <Header setSearchTerm={setSearchTerm} />
       {pathname === "/" ? <LandingPage /> : <Main searchTerm={searchTerm} />}
     </>
   );

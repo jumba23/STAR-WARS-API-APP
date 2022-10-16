@@ -3,46 +3,48 @@ import { useEffect, useState } from "react";
 import "./details.css";
 
 const Details = ({ list }) => {
+  const [prevPath, setPrevPath] = useState("");
   const { pathname } = useLocation();
   const { id } = useParams();
-  let index = id - 1;
+  let i = id - 1;
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
     switch (true) {
       case pathname.includes("people"):
         const people = [
-          ["Name", list[index].name],
-          ["Height", list[index].height],
-          ["Mass", list[index].mass],
-          ["Born", list[index].birth_year],
+          ["Name", list[i].name],
+          ["Height", list[i].height],
+          ["Mass", list[i].mass],
+          ["Born", list[i].birth_year],
         ];
+        setPrevPath(pathname);
         setDetails(people);
         break;
       case pathname.includes("planets"):
         const planets = [
-          ["Name", list[index].name],
-          ["Rotation", list[index].rotation_period],
-          ["Orbit", list[index].orbital_period],
-          ["Climate", list[index].climate],
+          ["Name", list[i].name],
+          ["Rotation", list[i].rotation_period],
+          ["Orbit", list[i].orbital_period],
+          ["Climate", list[i].climate],
         ];
         setDetails(planets);
         break;
       case pathname.includes("vehicles"):
         const vehicles = [
-          ["Name", list[index].name],
-          ["Model", list[index].model],
-          ["Length", list[index].length],
-          ["Crew", list[index].crew],
+          ["Name", list[i].name],
+          ["Model", list[i].model],
+          ["Length", list[i].length],
+          ["Crew", list[i].crew],
         ];
         setDetails(vehicles);
         break;
       case pathname.includes("species"):
         const species = [
-          ["Name", list[index].name],
-          ["Classification", list[index].classification],
-          ["Language", list[index].language],
-          ["Designation", list[index].designation],
+          ["Name", list[i].name],
+          ["Classification", list[i].classification],
+          ["Language", list[i].language],
+          ["Designation", list[i].designation],
         ];
         setDetails(species);
         break;

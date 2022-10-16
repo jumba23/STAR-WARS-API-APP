@@ -4,7 +4,7 @@ import "./header.css";
 import Nav from "../Nav/Nav";
 import SearchBar from "../SearchBar/SearchBar";
 
-const Header = ({setSearchTerm}) => {
+const Header = ({ setSearchTerm }) => {
   const { pathname } = useLocation();
   return (
     <>
@@ -16,7 +16,7 @@ const Header = ({setSearchTerm}) => {
       ) : (
         <div className="header-nav-search">
           <Nav />
-          <SearchBar setSearchTerm={setSearchTerm}/>
+          <SearchBar setSearchTerm={setSearchTerm} />
         </div>
       )}
     </>

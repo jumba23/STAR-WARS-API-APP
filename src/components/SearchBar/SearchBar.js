@@ -8,14 +8,12 @@ const SearchBar = ({ setSearchTerm }) => {
   const [category, setCategory] = useState("");
 
   const handleChange = (e) => setFormSearch(e.target.value);
-
-  useEffect(()=> {
+  useEffect(() => {
     setCategory(pathname.split("/")[1]);
-  },[pathname])
+  }, [pathname]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formSearch);
     setSearchTerm(formSearch);
     setFormSearch("");
   };
