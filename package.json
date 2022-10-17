@@ -16,7 +16,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^3.0.3"
   },
-  "homepage": "https://jumba23.github.io/star-wars-api-app/",
+  "homepage": "https://jumba23.github.io/star-wars-api-app",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
